@@ -1,11 +1,18 @@
 import java.util.*;
 class Minkowski{
     static Scanner scan = new Scanner(System.in);
+
+    /*Polygon
+      Defined by the vectors of its edge
+    */
     static class Polygon{
-	ArrayList<Vector> vectors = new ArrayList<>();
+	
+	private ArrayList<Vector> vectors = new ArrayList<>();
+	
 	public void addVector(Vector v){
 	    this.vectors.add(v);
 	}
+	
 	public Polygon(){
 	}
 
@@ -16,8 +23,11 @@ class Minkowski{
 	public void add(Vector v){
 	    this.vectors.add(v);
 	}
+
+	/*
+	  Construct Polygon from array of x,y coordinates of its vertices
+	*/
 	public Polygon(double[] vertices){
-	    //if(vertices.length%2!=0 || vertices.length<6) return;
 	    for(int i=0;i<vertices.length-3;i+=2){
 		double x1 = vertices[i];
 	        double y1 = vertices[i+1];
@@ -28,6 +38,8 @@ class Minkowski{
 	    }
 	    this.vectors.add(new Vector(vertices[vertices.length-2],vertices[vertices.length-1],vertices[0],vertices[1]));
 	}
+
+	
 	public void print(){
 	    for(Vector v: this.vectors){
 		System.out.println("From " + v.x1 + "," + v.y1 + " to " + v.x2 + "," + v.y2);
@@ -44,6 +56,7 @@ class Minkowski{
 	    return ret;
 	}
 
+	
 	public Polygon getMinkowski(Polygon p){
 	    Vector[] posVecs = this.getPosVecs();
 	    Vector[] posSec = p.getPosVecs();
@@ -93,15 +106,14 @@ class Minkowski{
 	public double getX(){
 	    return this.x2-this.x1;
 	}
+	public double getY(){
+	    return this.y2-this.y1;
+	}
 
 	public boolean lessThan(Vector v2){
 	    Vector v1 = this;
 	    return v1.getAngle()<v2.getAngle();
-        
 	}
-						     
-			   
-	
 
 	public double getAngle(){
 	    double x = this.getX();
@@ -127,9 +139,7 @@ class Minkowski{
 	    return myPos.y2>0?(myPos.x2>0?1:3):(myPos.x2>0?4:1);
 	}
 	    
-	public double getY(){
-	    return this.y2-this.y1;
-	}
+
 
 	public double slope(){
 	    return this.getY()/this.getX();
