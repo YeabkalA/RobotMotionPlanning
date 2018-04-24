@@ -18,7 +18,7 @@ public class Vector{
 
     // (x1,y1) - start point of the vector
     // (x2,y2) - end point of the vector
-    double x1,y1,x2,y2;
+    private double x1,y1,x2,y2;
 
     /**
      * @return x value of starting point
