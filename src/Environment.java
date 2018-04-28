@@ -5,6 +5,6 @@ public class Environment {
 	Polygon m1,m2,m3,m4;
 
 	public static void main(String[] args){
-		HashMap<double, Environment> levels =
+		HashMap<double, Environment> levels;
 	}
 }

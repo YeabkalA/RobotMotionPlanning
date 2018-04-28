@@ -78,7 +78,8 @@ public class Polygon{
     		count++;
     	}
 
-    	Arrays.sort(posVectorsMink,Comparator.comparing(s->s.getAngle()));
+    	//Arrays.sort(posVectorsMink,Comparator.comparing(s->s.getAngle()));
+    	Arrays.sort(posVectorsMink);
     	for(Vector v: posVectorsMink) v.print();
     		System.out.println("End of check");
 
@@ -103,6 +104,11 @@ public class Polygon{
     	Polygon ms = pol1.getMinkowski(pol2);
 
     	ms.print();
+
+
+
+
+
 
 
     }
