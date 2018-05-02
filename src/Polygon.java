@@ -8,16 +8,27 @@ public class Polygon{
 
 	private ArrayList<Vector> vectors = new ArrayList<>();
 
+    private Point origin;
+
+    public void setOrigin() {
+        origin = new Point(vectors.get(0).getx1(), vectors.get(0).gety1());
+    }
+
+    public Point getOrigin() {
+        return origin;
+    }
+
 	public void addVector(Vector v){
 		this.vectors.add(v);
 	}
 
+    public ArrayList<Vector> getVectors() {
+        return vectors;
+    }
+
 	public Polygon(){
 	}
 
-	public ArrayList<Vector> getVectors(){
-		return this.vectors;
-	}
 
 	public void add(Vector a){
 		this.vectors.add(a);
@@ -37,6 +48,11 @@ public class Polygon{
     		this.vectors.add(vec);
     	}
     	this.vectors.add(new Vector(vertices[vertices.length-2],vertices[vertices.length-1],vertices[0],vertices[1]));
+        setOrigin();
+    }
+
+    public Polygon(ArrayList<Vector> vectors) {
+        this.vectors = vectors;
     }
 
     /**
@@ -46,6 +62,18 @@ public class Polygon{
     	for(Vector v: this.vectors){
     		System.out.println("From " + v.x1 + "," + v.y1 + " to " + v.x2 + "," + v.y2);
     	}
+    }
+
+    public void translate(Point o) {
+
+        ArrayList<Vector> origVecs = getVectors();
+        for(Vector v: origVecs) v.translate(o.getX(),o.getY());
+        this.vectors = origVecs;
+
+    }
+
+    public void rotate(int degree){
+    //.........................
     }
 
     /**

@@ -5,6 +5,13 @@
  */
 public class Vector implements Comparable<Vector>{
 
+    public void translate(double x, double y){
+      this.x1 = this.x1+x;
+      this.x2 = this.x2+x;
+      this.y1 = this.y1+y;
+      this.y2 = this.y2+y;
+    }
+
     /**
      * @param starting and end point x and y coordinates
      * constructs a vector extending from (x1,y1)->(x2,y2)
