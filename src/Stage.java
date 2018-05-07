@@ -23,7 +23,7 @@ public class Stage {
 		// create the stage
 
 
-		double[] lowerBase = Arrays.stream("0 0 100 0 100 100 0 100".split(" ")).mapToDouble(Double::parseDouble).toArray();
+		double[] lowerBase = Arrays.stream("0 0 1000 0 1000 1000 0 1000".split(" ")).mapToDouble(Double::parseDouble).toArray();
 		Polygon base = new Polygon(lowerBase);
 
 		
@@ -42,9 +42,9 @@ public class Stage {
 
 			for(int j=0;j<s1.figures.size()-1;j++){
 				Point[] p1 = s1.figures.get(j).toPtArr();
-				System.out.println(Arrays.toString(p1));
+				//System.out.println(Arrays.toString(p1));
 				Point[] p2 = s2.figures.get(j).toPtArr();
-				System.out.println(Arrays.toString(p2));
+				//System.out.println(Arrays.toString(p2));
 				Triangulate.createSTL(p1,p2,i,i+5);
 				System.out.println("******************************");
 			}

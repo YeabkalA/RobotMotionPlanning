@@ -72,13 +72,17 @@ public class Vector implements Comparable<Vector>{
        return this.y2-this.y1;
    }
 
+   public void rotate(double deg){
+
+   }
+
    public int compareTo(Vector v){
         int result = 0;
         double dx = this.getX();
         double dy = this.getY();
         double vdx = v.getX();
         double vdy = v.getY();
-        System.out.printf("(%f, %f)-(%f, %f) ", dx, dy, vdx, vdy);
+        //System.out.printf("(%f, %f)-(%f, %f) ", dx, dy, vdx, vdy);
         if(dy == 0 && vdy == 0){
             if(dx > 0 && vdx < 0) result = -1;
             else if(dx < 0 && vdx > 0) result =  1;
@@ -100,7 +104,7 @@ public class Vector implements Comparable<Vector>{
         else if(dx * vdy - dy * vdx == 0) result = 0;
         else if(dx * vdy - dy * vdx > 0) result = -1;
         else result =  1;
-        System.out.println(result);
+        //System.out.println(result);
         return result;
    }
 
