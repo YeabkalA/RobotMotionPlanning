@@ -48,10 +48,9 @@ public class Environment {
 
     static void buildStage(Environment env) {
     	levels = new HashMap<>();
-    	for(int i=5;i<360;i+=5) {
+    	for(int i=0;i<=360;i+=5) {
     		Stage stage = new Stage();
-    		Polygon robot = env.getRobot();
-    		robot.rotate(i);
+    		Polygon robot = Polygon.rotatePolygon(env.getRobot(),i);
     		for(Polygon p: env.getObstacles()) {
     			Polygon minkSum = new Polygon();
     			minkSum = p.getMinkowski(robot);
@@ -69,7 +68,7 @@ public class Environment {
 		env.addObstaclesData();
 		buildStage(env);
 		System.out.println(levels.size());
-		for(Polygon o: env.obstacles) o.print();
+		
 		
     }
 }

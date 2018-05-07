@@ -1,12 +1,21 @@
 import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 /**
  * Polygon
  * described as list of vectors making up the polygon
  */
 public class Polygon{
 
-	private ArrayList<Vector> vectors = new ArrayList<>();
+	ArrayList<Vector> vectors = new ArrayList<>();
 
     private Point origin;
 
@@ -18,21 +27,57 @@ public class Polygon{
         return origin;
     }
 
-	public void addVector(Vector v){
-		this.vectors.add(v);
-	}
+    public void addVector(Vector v){
+      this.vectors.add(v);
+  }
 
-    public ArrayList<Vector> getVectors() {
-        return vectors;
+  public ArrayList<Vector> getVectors() {
+    return vectors;
+}
+
+public Polygon(){
+}
+
+
+public void add(Vector a){
+  this.vectors.add(a);
+}
+
+public static Polygon rotatePolygon(Polygon p, double deg){
+    p.setOrigin();
+    Point pointOfRotation = p.getOrigin();
+    ArrayList<Point> pts = new ArrayList<>();
+    pts.add(pointOfRotation);
+    ArrayList<Vector> vectors = p.getVectors();
+    for(int i=0;i<vectors.size()-1;i++){
+        Vector vec = vectors.get(i);
+        pts.add(new Point(vec.getx2(), vec.gety2()));
     }
+    Point[] rotatedPoints = new Point[pts.size()];
+    for(int i=0;i<pts.size();i++){
+        rotatedPoints[i] = rotate(p.getOrigin(), pts.get(i), deg);
+    }
+    ArrayList<Vector> newVectors = new ArrayList<>();
 
-	public Polygon(){
-	}
+    for(int i=0;i<rotatedPoints.length-1;i++){
+        newVectors.add(new Vector(rotatedPoints[i].getX(), rotatedPoints[i].getY(), rotatedPoints[i+1].getX(), rotatedPoints[i+1].getY()));
+    }
+    newVectors.add(new Vector(rotatedPoints[rotatedPoints.length-1].getX(), rotatedPoints[rotatedPoints.length-1].getY(), rotatedPoints[0].getX(), rotatedPoints[0].getY()));
+    return new Polygon(newVectors);
 
+}
 
-	public void add(Vector a){
-		this.vectors.add(a);
-	}
+public static Point rotate(Point center , Point point, double angle) {
+
+    //System.out.printf("Before (%f,%f)", point.getX(), point.getY());
+    angle = angle* (Math.PI/180); 
+    double rotatedX = Math.cos(angle) * (point.getX() - center.getX()) - Math.sin(angle) * (point.getY()-center.getY()) + center.getX();
+    double rotatedY = Math.sin(angle) * (point.getX() - center.getX()) + Math.cos(angle) * (point.getY() - center.getY()) + center.getY();
+    Point rPoint = new Point(rotatedX, rotatedY);
+    //System.out.printf("Before (%f,%f)", rPoint.getX(), rPoint.getY());
+    return rPoint;
+
+}
 
     /**
      * @param vertices the array of {x1,y1,x2,y2,...} values making up the polygon
@@ -68,12 +113,12 @@ public class Polygon{
 
         ArrayList<Vector> origVecs = getVectors();
         for(Vector v: origVecs) v.translate(o.getX(),o.getY());
-        this.vectors = origVecs;
+            this.vectors = origVecs;
 
     }
 
     public void rotate(int degree){
-    //.........................
+
     }
 
     /**
@@ -124,14 +169,31 @@ public class Polygon{
 
     public static void main(String[] args){
     	Scanner scan = new Scanner(System.in);
-    	double[] arr1 = Arrays.stream(scan.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
-    	double[] arr2 = Arrays.stream(scan.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
 
-    	Polygon pol1 = new Polygon(arr1);
-    	Polygon pol2 = new Polygon(arr2);
-    	Polygon ms = pol1.getMinkowski(pol2);
+        Point a = new Point(0,3);
+        Point por = new Point(0,1);
 
-    	ms.print();
+        for(double i=0;i<=360;i+=45){
+            Point rotated = rotate(por,a,i);
+            System.out.println("After rotating " + i + " degrees");
+            System.out.printf("(%f,%f)\n",rotated.getX(), rotated.getY());
+        }
+        
+    	//double[] arr1 = Arrays.stream(scan.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
+    	//double[] arr2 = Arrays.stream(scan.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
+
+    	//Polygon pol1 = new Polygon(arr1);
+        //Drawer d = new Drawer(pol1);
+        // pol1 = rotatePolygon(pol1,30);
+
+        // System.out.println("\n\n");
+        // pol1.print();
+
+       
+        //Polygon pol2 = new Polygon(arr2);
+        //Polygon ms = pol1.getMinkowski(pol2);
+
+       // ms.print();
 
 
 
@@ -140,5 +202,56 @@ public class Polygon{
 
 
     }
+
+
+static class Drawer extends JFrame {
+    JPanel panel;
+
+    public Drawer(Polygon p) {
+
+        setLayout(new BorderLayout());
+        setBackground(Color.BLACK);
+       
+
+        panel = new JPanel() {
+            public void paintComponent(Graphics g) {
+                Color[] colors = {Color.BLUE, Color.RED, Color.YELLOW,Color.GREEN};
+                 for(double j=0;j<=360;j+=45){
+                    g.setColor(new Color(((int)j+50)%255,  ((int)j+20)%255, ((int)j+100)%255));
+                    Polygon q = rotatePolygon(p,j);
+                    ArrayList<Vector> vectors = q.getVectors();
+                ArrayList<Point> pts = new ArrayList<>();
+                pts.add(new Point(vectors.get(0).getx1(), vectors.get(0).gety1()));
+                for(int i=0;i<vectors.size()-1;i++){
+                    Vector vec = vectors.get(i);
+                    pts.add(new Point(vec.getx2(), vec.gety2()));
+                }                        
+                int con = 1;
+              //  g.setColor(Color.WHITE);
+
+                System.out.println("*************" + pts.size());
+                int constant = 150;
+                for(int i=0;i<pts.size()-1;i++){
+                    g.drawLine(constant*(int)pts.get(i).getX(), constant*(int)pts.get(i).getY(), constant*(int)pts.get(i+1).getX(), constant*(int)pts.get(i+1).getY());
+                }
+
+                g.drawLine(constant*(int)pts.get(pts.size()-1).getX(), constant*(int)pts.get(pts.size()-1).getY(), constant*(int)pts.get(0).getX(), constant*(int)pts.get(0).getY());
+                 }
+
+                   
+
+
+
+
+            }
+        };
+        panel.setPreferredSize(new Dimension(2000,2000));
+        add(panel,BorderLayout.CENTER);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        this.setVisible(true);
+    }
 }
+}
+
 
