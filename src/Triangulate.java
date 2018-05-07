@@ -53,8 +53,8 @@ public class Triangulate {
 				Stage.printWriter.println("  endfacet");
 
 				P = face2[i];
-				q = face2[i+1];
-				r = face1[i+1];
+				q = face1[i+1];
+				r = face2[i+1];
 
 				Q = new Point3D(q.x-P.x, q.y-P.y, q.z-P.z);
 				R = new Point3D(r.x-P.x, r.y-P.y, r.z-P.z);
@@ -95,8 +95,8 @@ public class Triangulate {
 				Stage.printWriter.println("  endfacet");
 
 				P = face2[i];
-				q = face2[0];
-				r = face1[0];
+				q = face1[0];
+				r = face2[0];
 
 				Q = new Point3D(q.x-P.x, q.y-P.y, q.z-P.z);
 				R = new Point3D(r.x-P.x, r.y-P.y, r.z-P.z);

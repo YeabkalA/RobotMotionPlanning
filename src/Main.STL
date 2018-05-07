@@ -6,11 +6,11 @@ solid minkowski
       vertex 0.0 0.0 360.0
     endloop
   endfacet
-  facet normal -0.0 36000.0 0.0
+  facet normal 0.0 -36000.0 0.0
     outer loop
       vertex 0.0 0.0 360.0
-      vertex 100.0 0.0 360.0
       vertex 100.0 0.0 0.0
+      vertex 100.0 0.0 360.0
     endloop
   endfacet
   facet normal 36000.0 -0.0 0.0
@@ -20,11 +20,11 @@ solid minkowski
       vertex 100.0 0.0 360.0
     endloop
   endfacet
-  facet normal -36000.0 0.0 0.0
+  facet normal 36000.0 -0.0 0.0
     outer loop
       vertex 100.0 0.0 360.0
-      vertex 100.0 100.0 360.0
       vertex 100.0 100.0 0.0
+      vertex 100.0 100.0 360.0
     endloop
   endfacet
   facet normal 0.0 36000.0 -0.0
@@ -34,11 +34,11 @@ solid minkowski
       vertex 100.0 100.0 360.0
     endloop
   endfacet
-  facet normal -0.0 -36000.0 0.0
+  facet normal 0.0 36000.0 0.0
     outer loop
       vertex 100.0 100.0 360.0
-      vertex 0.0 100.0 360.0
       vertex 0.0 100.0 0.0
+      vertex 0.0 100.0 360.0
     endloop
   endfacet
   facet normal -36000.0 -0.0 0.0
@@ -48,11 +48,11 @@ solid minkowski
       vertex 0.0 100.0 360.0
     endloop
   endfacet
-  facet normal 36000.0 0.0 0.0
+  facet normal -36000.0 -0.0 0.0
     outer loop
       vertex 0.0 100.0 360.0
-      vertex 0.0 0.0 360.0
       vertex 0.0 0.0 0.0
+      vertex 0.0 0.0 360.0
     endloop
   endfacet
 endsolid
