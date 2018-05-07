@@ -139,6 +139,23 @@ public static Point rotate(Point center , Point point, double angle) {
      * @return the Minkowski sum of this with p
      */
     
+    public Point[] toPtArr(){
+        setOrigin();
+        ArrayList<Point> pts = new ArrayList<>();
+        pts.add(getOrigin());
+        ArrayList<Vector> vectors = getVectors();
+        for(int i=0;i<vectors.size()-1;i++){
+            Vector vec = vectors.get(i);
+            pts.add(new Point(vec.getx2(), vec.gety2()));
+        }
+        Point[] ret = new Point[pts.size()];
+
+        for(int i=0;i<pts.size();i++){
+            ret[i] = pts.get(i);
+        }
+        return ret;
+    }
+
     public Polygon getMinkowski(Polygon p){
     	Vector[] posVecs = this.getPosVecs();
     	Vector[] posSec = p.getPosVecs();
@@ -170,14 +187,24 @@ public static Point rotate(Point center , Point point, double angle) {
     public static void main(String[] args){
     	Scanner scan = new Scanner(System.in);
 
-        Point a = new Point(0,3);
-        Point por = new Point(0,1);
+        double[] arr1 = Arrays.stream(scan.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
 
-        for(double i=0;i<=360;i+=45){
-            Point rotated = rotate(por,a,i);
-            System.out.println("After rotating " + i + " degrees");
-            System.out.printf("(%f,%f)\n",rotated.getX(), rotated.getY());
+        Polygon pol1 = new Polygon(arr1);
+
+        Point[] pointArr = pol1.toPtArr();
+
+        for(Point p: pointArr){
+            System.out.printf("--(%f, %f) \n\n",p.getX(), p.getY());
         }
+
+        // Point a = new Point(0,3);
+        // Point por = new Point(0,1);
+
+        // for(double i=0;i<=360;i+=45){
+        //     Point rotated = rotate(por,a,i);
+        //     System.out.println("After rotating " + i + " degrees");
+        //     System.out.printf("(%f,%f)\n",rotated.getX(), rotated.getY());
+        // }
         
     	//double[] arr1 = Arrays.stream(scan.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
     	//double[] arr2 = Arrays.stream(scan.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
@@ -189,7 +216,7 @@ public static Point rotate(Point center , Point point, double angle) {
         // System.out.println("\n\n");
         // pol1.print();
 
-       
+
         //Polygon pol2 = new Polygon(arr2);
         //Polygon ms = pol1.getMinkowski(pol2);
 
@@ -204,54 +231,54 @@ public static Point rotate(Point center , Point point, double angle) {
     }
 
 
-static class Drawer extends JFrame {
-    JPanel panel;
+    static class Drawer extends JFrame {
+        JPanel panel;
 
-    public Drawer(Polygon p) {
+        public Drawer(Polygon p) {
 
-        setLayout(new BorderLayout());
-        setBackground(Color.BLACK);
-       
+            setLayout(new BorderLayout());
+            setBackground(Color.BLACK);
 
-        panel = new JPanel() {
-            public void paintComponent(Graphics g) {
-                Color[] colors = {Color.BLUE, Color.RED, Color.YELLOW,Color.GREEN};
-                 for(double j=0;j<=360;j+=45){
-                    g.setColor(new Color(((int)j+50)%255,  ((int)j+20)%255, ((int)j+100)%255));
-                    Polygon q = rotatePolygon(p,j);
-                    ArrayList<Vector> vectors = q.getVectors();
-                ArrayList<Point> pts = new ArrayList<>();
-                pts.add(new Point(vectors.get(0).getx1(), vectors.get(0).gety1()));
-                for(int i=0;i<vectors.size()-1;i++){
-                    Vector vec = vectors.get(i);
-                    pts.add(new Point(vec.getx2(), vec.gety2()));
-                }                        
-                int con = 1;
+
+            panel = new JPanel() {
+                public void paintComponent(Graphics g) {
+                    Color[] colors = {Color.BLUE, Color.RED, Color.YELLOW,Color.GREEN};
+                    for(double j=0;j<=360;j+=45){
+                        g.setColor(new Color(((int)j+50)%255,  ((int)j+20)%255, ((int)j+100)%255));
+                        Polygon q = rotatePolygon(p,j);
+                        ArrayList<Vector> vectors = q.getVectors();
+                        ArrayList<Point> pts = new ArrayList<>();
+                        pts.add(new Point(vectors.get(0).getx1(), vectors.get(0).gety1()));
+                        for(int i=0;i<vectors.size()-1;i++){
+                            Vector vec = vectors.get(i);
+                            pts.add(new Point(vec.getx2(), vec.gety2()));
+                        }                        
+                        int con = 1;
               //  g.setColor(Color.WHITE);
 
-                System.out.println("*************" + pts.size());
-                int constant = 150;
-                for(int i=0;i<pts.size()-1;i++){
-                    g.drawLine(constant*(int)pts.get(i).getX(), constant*(int)pts.get(i).getY(), constant*(int)pts.get(i+1).getX(), constant*(int)pts.get(i+1).getY());
+                        System.out.println("*************" + pts.size());
+                        int constant = 150;
+                        for(int i=0;i<pts.size()-1;i++){
+                            g.drawLine(constant*(int)pts.get(i).getX(), constant*(int)pts.get(i).getY(), constant*(int)pts.get(i+1).getX(), constant*(int)pts.get(i+1).getY());
+                        }
+
+                        g.drawLine(constant*(int)pts.get(pts.size()-1).getX(), constant*(int)pts.get(pts.size()-1).getY(), constant*(int)pts.get(0).getX(), constant*(int)pts.get(0).getY());
+                    }
+
+
+
+
+
+
                 }
-
-                g.drawLine(constant*(int)pts.get(pts.size()-1).getX(), constant*(int)pts.get(pts.size()-1).getY(), constant*(int)pts.get(0).getX(), constant*(int)pts.get(0).getY());
-                 }
-
-                   
-
-
-
-
-            }
-        };
-        panel.setPreferredSize(new Dimension(2000,2000));
-        add(panel,BorderLayout.CENTER);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.pack();
-        this.setVisible(true);
+            };
+            panel.setPreferredSize(new Dimension(2000,2000));
+            add(panel,BorderLayout.CENTER);
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.pack();
+            this.setVisible(true);
+        }
     }
-}
 }
 
 

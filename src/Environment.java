@@ -1,9 +1,10 @@
 import java.util.*;
+import java.io.*;
 public class Environment {
 
 
     static Scanner scan = new Scanner(System.in);
-    static HashMap<Integer, Stage> levels;
+    static HashMap<Double, Stage> levels;
 
     // the Minkowski sums of each obstacle with the robot
     Polygon robot;
@@ -46,28 +47,32 @@ public class Environment {
 		}
     }
 
-    static void buildStage(Environment env) {
+    public static void buildStage(Environment env) throws IOException {
     	levels = new HashMap<>();
-    	for(int i=0;i<=360;i+=5) {
+    	for(double i=5;i<=360;i+=5) {
     		Stage stage = new Stage();
     		Polygon robot = Polygon.rotatePolygon(env.getRobot(),i);
     		for(Polygon p: env.getObstacles()) {
     			Polygon minkSum = new Polygon();
     			minkSum = p.getMinkowski(robot);
     			minkSum.translate(p.getOrigin());
-    			stage.add(minkSum);
+    			stage.figures.add(minkSum);
     		}
     		levels.put(i,stage);
     	}
+
+
+        
+       
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
 
 		Environment env = new Environment();
 		env.addRobotData();
 		env.addObstaclesData();
 		buildStage(env);
-		System.out.println(levels.size());
+		Stage.createMainSTL(levels);
 		
 		
     }

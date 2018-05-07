@@ -1,5 +1,7 @@
 import java.io.*;
-class Triangulate {
+public class Triangulate {
+
+	static File file;
 	static class Point3D {
 		double x,y,z;
 
@@ -11,22 +13,22 @@ class Triangulate {
 
 	}
 
-	public static void createSTL() throws IOException{
-		File file = new File ("stageTry.STL");
-		PrintWriter printWriter = new PrintWriter (file);
-		Point3D p1 = new Point3D(0.0,0.0,0.0);
-		Point3D p2 = new Point3D(100.0,0.0,0.0);
-		Point3D p3 = new Point3D(100.0,100.0,0.0);
-		Point3D p4 = new Point3D(0.0,100.0,0.0);
-		Point3D p5 = new Point3D(0.0,0.0,50.0);
-		Point3D p6 = new Point3D(100.0,0.0,50.0);
-		Point3D p7 = new Point3D(100.0,100.0,50.0);
-		Point3D p8 = new Point3D(0.0,100.0,50.0);
+	public static void createSTL(Point[] f1, Point[] f2, double l1, double l2) throws IOException{
+		file = Stage.file;
 
-		Point3D[] face1 = {p1,p2,p3,p4};
-		Point3D[] face2 = {p5,p6,p7,p8};
+		Point3D[] face1 = new Point3D[f1.length];
 
-		printWriter.println("solid Minkowski");
+		Point3D[] face2 = new Point3D[f2.length];
+
+		for(int i=0;i<f1.length;i++){
+			face1[i] = new Point3D(f1[i].getX(), f1[i].getY(), l1);
+		}
+
+		for(int i=0;i<f1.length;i++){
+			face2[i] = new Point3D(f2[i].getX(), f2[i].getY(), l2);
+		}
+
+		
 
 		for(int i=0;i<face1.length;i++){
 			if(i!=face1.length-1){
@@ -42,13 +44,13 @@ class Triangulate {
 				Point3D N = new Point3D(n.x/nLength, n.y/nLength, n.z/nLength);
 
 
-				printWriter.println("  facet normal " + n.x + " " + n.y + " " + n.z);
-				printWriter.println("    outer loop");
-				printWriter.println("      vertex " + P.x + " " + P.y + " " + P.z);
-				printWriter.println("      vertex " + q.x + " " + q.y + " " + q.z);
-				printWriter.println("      vertex " + r.x + " " + r.y + " " + r.z);
-				printWriter.println("    endloop");
-				printWriter.println("  endfacet");
+				Stage.printWriter.println("  facet normal " + n.x + " " + n.y + " " + n.z);
+				Stage.printWriter.println("    outer loop");
+				Stage.printWriter.println("      vertex " + P.x + " " + P.y + " " + P.z);
+				Stage.printWriter.println("      vertex " + q.x + " " + q.y + " " + q.z);
+				Stage.printWriter.println("      vertex " + r.x + " " + r.y + " " + r.z);
+				Stage.printWriter.println("    endloop");
+				Stage.printWriter.println("  endfacet");
 
 				P = face2[i];
 				q = face2[i+1];
@@ -63,13 +65,13 @@ class Triangulate {
 				N = new Point3D(n.x/nLength, n.y/nLength, n.z/nLength);
 
 
-				printWriter.println("  facet normal " + n.x + " " + n.y + " " + n.z);
-				printWriter.println("    outer loop");
-				printWriter.println("      vertex " + P.x + " " + P.y + " " + P.z);
-				printWriter.println("      vertex " + q.x + " " + q.y + " " + q.z);
-				printWriter.println("      vertex " + r.x + " " + r.y + " " + r.z);
-				printWriter.println("    endloop");
-				printWriter.println("  endfacet");
+				Stage.printWriter.println("  facet normal " + n.x + " " + n.y + " " + n.z);
+				Stage.printWriter.println("    outer loop");
+				Stage.printWriter.println("      vertex " + P.x + " " + P.y + " " + P.z);
+				Stage.printWriter.println("      vertex " + q.x + " " + q.y + " " + q.z);
+				Stage.printWriter.println("      vertex " + r.x + " " + r.y + " " + r.z);
+				Stage.printWriter.println("    endloop");
+				Stage.printWriter.println("  endfacet");
 			}
 			else{
 				Point3D P = face1[i];
@@ -84,13 +86,13 @@ class Triangulate {
 				Point3D N = new Point3D(n.x/nLength, n.y/nLength, n.z/nLength);
 
 
-				printWriter.println("  facet normal " + n.x + " " + n.y + " " + n.z);
-				printWriter.println("    outer loop");
-				printWriter.println("      vertex " + P.x + " " + P.y + " " + P.z);
-				printWriter.println("      vertex " + q.x + " " + q.y + " " + q.z);
-				printWriter.println("      vertex " + r.x + " " + r.y + " " + r.z);
-				printWriter.println("    endloop");
-				printWriter.println("  endfacet");
+				Stage.printWriter.println("  facet normal " + n.x + " " + n.y + " " + n.z);
+				Stage.printWriter.println("    outer loop");
+				Stage.printWriter.println("      vertex " + P.x + " " + P.y + " " + P.z);
+				Stage.printWriter.println("      vertex " + q.x + " " + q.y + " " + q.z);
+				Stage.printWriter.println("      vertex " + r.x + " " + r.y + " " + r.z);
+				Stage.printWriter.println("    endloop");
+				Stage.printWriter.println("  endfacet");
 
 				P = face2[i];
 				q = face2[0];
@@ -105,13 +107,13 @@ class Triangulate {
 				N = new Point3D(n.x/nLength, n.y/nLength, n.z/nLength);
 
 
-				printWriter.println("  facet normal " + n.x + " " + n.y + " " + n.z);
-				printWriter.println("    outer loop");
-				printWriter.println("      vertex " + P.x + " " + P.y + " " + P.z);
-				printWriter.println("      vertex " + q.x + " " + q.y + " " + q.z);
-				printWriter.println("      vertex " + r.x + " " + r.y + " " + r.z);
-				printWriter.println("    endloop");
-				printWriter.println("  endfacet");
+				Stage.printWriter.println("  facet normal " + n.x + " " + n.y + " " + n.z);
+				Stage.printWriter.println("    outer loop");
+				Stage.printWriter.println("      vertex " + P.x + " " + P.y + " " + P.z);
+				Stage.printWriter.println("      vertex " + q.x + " " + q.y + " " + q.z);
+				Stage.printWriter.println("      vertex " + r.x + " " + r.y + " " + r.z);
+				Stage.printWriter.println("    endloop");
+				Stage.printWriter.println("  endfacet");
 			}
 
 
@@ -132,11 +134,12 @@ class Triangulate {
 
 
 
-		printWriter.println ("endsolid");
-		printWriter.close (); 
+		Stage.printWriter.println ("endsolid");
+		Stage.printWriter.close (); 
 	}
 
 	public static void main(String[] args) throws IOException{
-		createSTL();
+		//createSTL();
+
 	}
 }
