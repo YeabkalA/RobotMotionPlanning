@@ -49,7 +49,7 @@ public class Environment {
 
     public static void buildStage(Environment env) throws IOException {
     	levels = new HashMap<>();
-    	for(double i=5;i<=360;i+=5) {
+    	for(double i=0.0;i<=360.0;i+=5.0) {
     		Stage stage = new Stage();
     		Polygon robot = Polygon.rotatePolygon(env.getRobot(),i);
     		for(Polygon p: env.getObstacles()) {

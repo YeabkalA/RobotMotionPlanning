@@ -170,7 +170,7 @@ public static Point rotate(Point center , Point point, double angle) {
 
     	//Arrays.sort(posVectorsMink,Comparator.comparing(s->s.getAngle()));
     	Arrays.sort(posVectorsMink);
-    	for(Vector v: posVectorsMink) v.print();
+    	//for(Vector v: posVectorsMink) v.print();
     		System.out.println("End of check");
 
     	int fir=0,sec=0;
