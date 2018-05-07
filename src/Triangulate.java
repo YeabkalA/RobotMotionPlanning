@@ -12,7 +12,7 @@ class Triangulate {
 	}
 
 	public static void createSTL() throws IOException{
-		File file = new File ("STL.txt");
+		File file = new File ("stageTry.STL");
 		PrintWriter printWriter = new PrintWriter (file);
 		Point3D p1 = new Point3D(0.0,0.0,0.0);
 		Point3D p2 = new Point3D(100.0,0.0,0.0);
