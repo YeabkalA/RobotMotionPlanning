@@ -2,7 +2,7 @@
 
 By Charlie Dadna and Yeabkal Wubshit <br>
 Under the supervision of Dr. Robert Hochberg <br>
-University of Dallas <br>
+
 May 2018
 
 To run project
