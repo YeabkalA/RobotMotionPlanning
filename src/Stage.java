@@ -27,8 +27,8 @@ public class Stage {
 		printWriter.println("solid minkowski");
 
 		if(stage) Triangulate.createSTL(base.toPtArr(),base.toPtArr(),0,360);
-		
-		for(double i=0.0;i<90.0;i+=5.0){
+
+		for(double i=0.0;i<360.0;i+=5.0){
 			Stage s1 = levels.get(i);
 			Stage s2 = levels.get(i+5);
 
