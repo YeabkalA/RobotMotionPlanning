@@ -23,7 +23,7 @@ public class Stage {
 		// create the stage
 
 
-		double[] lowerBase = Arrays.stream("0 0 1000 0 1000 1000 0 1000".split(" ")).mapToDouble(Double::parseDouble).toArray();
+		double[] lowerBase = Arrays.stream("0 0 10000 0 10000 10000 0 10000".split(" ")).mapToDouble(Double::parseDouble).toArray();
 		Polygon base = new Polygon(lowerBase);
 
 		
