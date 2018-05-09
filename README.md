@@ -1,6 +1,6 @@
 # Robot Motion Planning
 
-By Charlie Dadna and Yeabkal Wubshit <br>
+By Charlie Dana and Yeabkal Wubshit <br>
 Under the supervision of Dr. Robert Hochberg <br>
 
 May 2018
