@@ -3,7 +3,7 @@
 By Charlie Dana and Yeabkal Wubshit <br>
 Under the supervision of Dr. Robert Hochberg <br>
 
-May 2018
+May 2018.
 
 To run project
 
