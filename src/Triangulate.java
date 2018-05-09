@@ -25,12 +25,12 @@ public class Triangulate {
 		Point3D[] face2 = new Point3D[f2.length];
 
 		for(int i=0;i<f1.length;i++){
-			face1[i] = new Point3D(f1[i].getX(), f1[i].getY(), 5*l1);
+			face1[i] = new Point3D(f1[i].getX(), f1[i].getY(), 20*l1);
 			System.out.println("Point::: " + face1[i].toString());
 		}
 
 		for(int i=0;i<f1.length;i++){
-			face2[i] = new Point3D(f2[i].getX(), f2[i].getY(), 5*l2);
+			face2[i] = new Point3D(f2[i].getX(), f2[i].getY(), 20*l2);
 		}
 
 		

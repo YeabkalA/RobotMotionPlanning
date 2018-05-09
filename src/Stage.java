@@ -18,7 +18,7 @@ public class Stage {
 
 
 	public static void createMainSTL(HashMap<Double, Stage> levels) throws IOException{
-		file = new File("src/Main5.STL");
+		file = new File("src/Main6.STL");
 
 		// create the stage
 
@@ -34,7 +34,7 @@ public class Stage {
 		printWriter.println("solid minkowski");
 
 		//Triangulate.createSTL(base.toPtArr(),base.toPtArr(),0,360);
-		for(double i=0.0;i<360.0;i+=5.0){
+		for(double i=0.0;i<90.0;i+=5.0){
 			Stage s1 = levels.get(i);
 			Stage s2 = levels.get(i+5);
 
