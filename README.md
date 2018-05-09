@@ -1,9 +1,9 @@
 # RobotMotionPlanning
 
-*By Charlie Dadna and Yeabkal Wubshit*
-*Under the supervision of Dr. Robert Hochberg*
-*University of Dallas*
-*May 2018*
+By Charlie Dadna and Yeabkal Wubshit
+Under the supervision of Dr. Robert Hochberg
+University of Dallas
+May 2018
 
 To run project
 
