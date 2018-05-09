@@ -18,7 +18,7 @@ public class Triangulate {
 	}
 
 	public static void createSTL(Point[] f1, Point[] f2, double l1, double l2) throws IOException{
-		file = new File("src/Main2.STL");
+		file = Stage.file;
 
 		Point3D[] face1 = new Point3D[f1.length];
 

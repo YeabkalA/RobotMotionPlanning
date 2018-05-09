@@ -6803,7 +6803,5 @@ solid minkowski
       vertex 234.72963553338607 396.9615506024416 350.0
     endloop
   endfacet
-  facet normal 0.0 1000.0 -755.2770689255908
-    outer loop
-      vertex 251.76380902050414 393.18516525781365 345.0
+endsolid
  
