@@ -1,8 +1,8 @@
 # RobotMotionPlanning
 
-By Charlie Dadna and Yeabkal Wubshit
-Under the supervision of Dr. Robert Hochberg
-University of Dallas
+By Charlie Dadna and Yeabkal Wubshit\n
+Under the supervision of Dr. Robert Hochberg\n
+University of Dallas\n
 May 2018
 
 To run project
