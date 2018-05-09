@@ -67,7 +67,8 @@ public class Environment {
     }
 
     public static void main(String[] args) throws IOException{
-
+//    	System.out.println("Name of file");
+//    	String name = scan.nextLine();
 		Environment env = new Environment();
 		env.addRobotData();
 		env.addObstaclesData();
