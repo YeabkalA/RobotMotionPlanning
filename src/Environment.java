@@ -74,14 +74,17 @@ public class Environment {
     public static void main(String[] args) throws Exception{
 
 		Environment env = new Environment();
-        System.out.println("PLEASE ENTER THE DIRECTORY OF THE STL FILE WHERE YOU WANT YOUR FINAL RESULTS TO BE SAVED...");
+        System.out.println("PLEASE ENTER THE DIRECTORY OF THE STL FILE WHERE YOU WANT YOUR FINAL RESULTS TO BE SAVED:");
         String savingDir = scan.nextLine();
         beginDataInput();
 		env.addRobotData();
 		env.addObstaclesData();
+        System.out.println("Do you want the stage's frame to be included in the STL file? y/n?");
+        String stageFrame = scan.nextLine();
 		buildStage(env);
-		Stage.createMainSTL(levels, savingDir);
-		
-		
+		if(stageFrame.equals("y") || stageFrame.equals("Y"))
+            Stage.createMainSTL(levels, savingDir, true);
+        else 
+            Stage.createMainSTL(levels, savingDir, false);		
     }
 }

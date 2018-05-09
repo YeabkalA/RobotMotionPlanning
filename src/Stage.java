@@ -17,7 +17,7 @@ public class Stage {
 
 
 
-	public static void createMainSTL(HashMap<Double, Stage> levels, String directory) throws IOException{
+	public static void createMainSTL(HashMap<Double, Stage> levels, String directory, boolean stage) throws IOException{
 		file = new File(directory);
 
 		double[] lowerBase = Arrays.stream("0 0 1000 0 1000 1000 0 1000".split(" ")).mapToDouble(Double::parseDouble).toArray();
@@ -26,7 +26,8 @@ public class Stage {
 		printWriter = new PrintWriter(file);
 		printWriter.println("solid minkowski");
 
-		Triangulate.createSTL(base.toPtArr(),base.toPtArr(),0,360);
+		if(stage) Triangulate.createSTL(base.toPtArr(),base.toPtArr(),0,360);
+		
 		for(double i=0.0;i<90.0;i+=5.0){
 			Stage s1 = levels.get(i);
 			Stage s2 = levels.get(i+5);
