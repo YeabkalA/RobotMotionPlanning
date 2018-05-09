@@ -69,12 +69,11 @@ public static Polygon rotatePolygon(Polygon p, double deg){
 
 public static Point rotate(Point center , Point point, double angle) {
 
-    //System.out.printf("Before (%f,%f)", point.getX(), point.getY());
     angle = angle* (Math.PI/180); 
     double rotatedX = Math.cos(angle) * (point.getX() - center.getX()) - Math.sin(angle) * (point.getY()-center.getY()) + center.getX();
     double rotatedY = Math.sin(angle) * (point.getX() - center.getX()) + Math.cos(angle) * (point.getY() - center.getY()) + center.getY();
     Point rPoint = new Point(rotatedX, rotatedY);
-    //System.out.printf("Before (%f,%f)", rPoint.getX(), rPoint.getY());
+
     return rPoint;
 
 }
@@ -109,16 +108,13 @@ public static Point rotate(Point center , Point point, double angle) {
     	}
     }
 
+    /**
+     * Translates the polygon by o.x, o.y
+     */
     public void translate(Point o) {
-
         ArrayList<Vector> origVecs = getVectors();
         for(Vector v: origVecs) v.translate(o.getX(),o.getY());
             this.vectors = origVecs;
-
-    }
-
-    public void rotate(int degree){
-
     }
 
     /**
@@ -168,10 +164,7 @@ public static Point rotate(Point center , Point point, double angle) {
     		count++;
     	}
 
-    	//Arrays.sort(posVectorsMink,Comparator.comparing(s->s.getAngle()));
     	Arrays.sort(posVectorsMink);
-    	//for(Vector v: posVectorsMink) v.print();
-    		System.out.println("End of check");
 
     	int fir=0,sec=0;
 
@@ -184,60 +177,8 @@ public static Point rotate(Point center , Point point, double angle) {
     	return MinkowskiSum;
     }
 
-    public static void main(String[] args){
-    	Scanner scan = new Scanner(System.in);
 
-        double[] arr1 = Arrays.stream(scan.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
-
-        Polygon pol1 = new Polygon(arr1);
-
-        Point[] pointArr = pol1.toPtArr();
-
-        for(Point p: pointArr){
-            System.out.printf("--(%f, %f) \n\n",p.getX(), p.getY());
-        }
-        
-        Polygon rotatedPol = rotatePolygon(pol1, 360);
-        
-        pol1.print();
-        rotatedPol.print();
-//        Drawer d = new Drawer(pol1);
-//        Drawer d2 = new Drawer(rotatedPol);
-
-        // Point a = new Point(0,3);
-        // Point por = new Point(0,1);
-
-        // for(double i=0;i<=360;i+=45){
-        //     Point rotated = rotate(por,a,i);
-        //     System.out.println("After rotating " + i + " degrees");
-        //     System.out.printf("(%f,%f)\n",rotated.getX(), rotated.getY());
-        // }
-        
-    	//double[] arr1 = Arrays.stream(scan.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
-    	//double[] arr2 = Arrays.stream(scan.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
-
-    	//Polygon pol1 = new Polygon(arr1);
-        //Drawer d = new Drawer(pol1);
-        // pol1 = rotatePolygon(pol1,30);
-
-        // System.out.println("\n\n");
-        // pol1.print();
-
-
-        //Polygon pol2 = new Polygon(arr2);
-        //Polygon ms = pol1.getMinkowski(pol2);
-
-       // ms.print();
-
-
-
-
-
-
-
-    }
-
-
+    // for testing purposes, draws a polygon
     static class Drawer extends JFrame {
         JPanel panel;
 
@@ -245,7 +186,6 @@ public static Point rotate(Point center , Point point, double angle) {
 
             setLayout(new BorderLayout());
             setBackground(Color.BLACK);
-
 
             panel = new JPanel() {
                 public void paintComponent(Graphics g) {
@@ -261,7 +201,6 @@ public static Point rotate(Point center , Point point, double angle) {
                             pts.add(new Point(vec.getx2(), vec.gety2()));
                         }                        
                         int con = 1;
-              //  g.setColor(Color.WHITE);
 
                         System.out.println("*************" + pts.size());
                         int constant = 150;
@@ -271,12 +210,6 @@ public static Point rotate(Point center , Point point, double angle) {
 
                         g.drawLine(constant*(int)pts.get(pts.size()-1).getX(), constant*(int)pts.get(pts.size()-1).getY(), constant*(int)pts.get(0).getX(), constant*(int)pts.get(0).getY());
                     }
-
-
-
-
-
-
                 }
             };
             panel.setPreferredSize(new Dimension(2000,2000));

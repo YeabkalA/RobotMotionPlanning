@@ -18,7 +18,7 @@ public class Stage {
 
 
 	public static void createMainSTL(HashMap<Double, Stage> levels, String directory, boolean stage) throws IOException{
-		file = new File(directory);
+		file = new File("../STLs/"+directory);
 
 		double[] lowerBase = Arrays.stream("0 0 1000 0 1000 1000 0 1000".split(" ")).mapToDouble(Double::parseDouble).toArray();
 		Polygon base = new Polygon(lowerBase);
@@ -32,22 +32,13 @@ public class Stage {
 			Stage s1 = levels.get(i);
 			Stage s2 = levels.get(i+5);
 
-			System.out.println(s1.figures.size() + "<<<<<<<<<<<<");
-
 			for(int j=0;j<s1.figures.size()-1;j++){
 				Point[] p1 = s1.figures.get(j).toPtArr();
-				//System.out.println(Arrays.toString(p1));
 				Point[] p2 = s2.figures.get(j).toPtArr();
-				//System.out.println(Arrays.toString(p2));
 				Triangulate.createSTL(p1,p2,i,i+5);
-				System.out.println("******************************");
 			}
-
-
 		}
 		
-		
-
 		printWriter.println ("endsolid");
 		printWriter.close();
 	}

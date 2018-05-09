@@ -76,13 +76,15 @@ public class Vector implements Comparable<Vector>{
 
    }
 
+   // compares vectors by angle from +x axis
+   // Dr. Hochberg helped use sigmas in making this comparing method work
    public int compareTo(Vector v){
         int result = 0;
         double dx = this.getX();
         double dy = this.getY();
         double vdx = v.getX();
         double vdy = v.getY();
-        //System.out.printf("(%f, %f)-(%f, %f) ", dx, dy, vdx, vdy);
+
         if(dy == 0 && vdy == 0){
             if(dx > 0 && vdx < 0) result = -1;
             else if(dx < 0 && vdx > 0) result =  1;
@@ -104,48 +106,8 @@ public class Vector implements Comparable<Vector>{
         else if(dx * vdy - dy * vdx == 0) result = 0;
         else if(dx * vdy - dy * vdx > 0) result = -1;
         else result =  1;
-        //System.out.println(result);
         return result;
    }
-
-    /**
-     * @param v2 vector with whom this is compared
-     * @return true if this<v2, else false, compared based on angles from x axis;
-     */
-    public boolean lessThan(Vector v2){
-	Vector v1 = this;
-	return v1.getAngle()<v2.getAngle();
-    }
-
-    /**
-     * @return angle of the position vector from the x axis
-     */
-    public double getAngle(){
-	double x = this.getX();
-	double y = this.getY();
-	double angle = (double)Math.toDegrees(Math.atan(y*1.0/x));
-	switch(this.getQuadrant()){
-	case 2:
-	    angle = 180-angle;
-	    break;
-	case 3:
-	    angle = 180+angle;
-	    break;
-	case 4:
-	    angle = 360-angle;
-	    break;
-	}
-	return angle;
-
-    }
-
-    /**
-     * @return the quadrant which the position vector is in
-     */
-    public int getQuadrant(){
-	Vector myPos = this.getPosVector();
-	return myPos.y2>0?(myPos.x2>0?1:3):(myPos.x2>0?4:1);
-    }
 
     /**
      * @return returns the slope of the segment extending from the start to the end point of the vector

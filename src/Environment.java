@@ -74,7 +74,7 @@ public class Environment {
     public static void main(String[] args) throws Exception{
 
 		Environment env = new Environment();
-        System.out.println("PLEASE ENTER THE DIRECTORY OF THE STL FILE WHERE YOU WANT YOUR FINAL RESULTS TO BE SAVED:");
+        System.out.println("PLEASE ENTER THE NAME OF YOUR NEW STL FILE TO SAVE YOUR RESUTLS:");
         String savingDir = scan.nextLine();
         beginDataInput();
 		env.addRobotData();

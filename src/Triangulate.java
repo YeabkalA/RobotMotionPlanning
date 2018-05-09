@@ -14,7 +14,6 @@ public class Triangulate {
 		public String toString() {
 			return String.format("P3D(%f,  %f, %f)", x, y, z); 
 		}
-
 	}
 
 	public static void createSTL(Point[] f1, Point[] f2, double l1, double l2) throws IOException{
@@ -26,14 +25,12 @@ public class Triangulate {
 
 		for(int i=0;i<f1.length;i++){
 			face1[i] = new Point3D(f1[i].getX(), f1[i].getY(), 20*l1);
-			System.out.println("Point::: " + face1[i].toString());
 		}
 
 		for(int i=0;i<f1.length;i++){
 			face2[i] = new Point3D(f2[i].getX(), f2[i].getY(), 20*l2);
 		}
 
-		
 
 		for(int i=0;i<face1.length;i++){
 			if(i!=face1.length-1){
@@ -47,7 +44,6 @@ public class Triangulate {
 					Q.x*R.y - Q.y*R.x);
 				double nLength = Math.sqrt(n.x*n.x + n.y*n.y + n.z*n.z);
 				Point3D N = new Point3D(n.x/nLength, n.y/nLength, n.z/nLength);
-
 
 				Stage.printWriter.println("  facet normal " + n.x + " " + n.y + " " + n.z);
 				Stage.printWriter.println("    outer loop");
@@ -68,7 +64,6 @@ public class Triangulate {
 					Q.x*R.y - Q.y*R.x);
 				nLength = Math.sqrt(n.x*n.x + n.y*n.y + n.z*n.z);
 				N = new Point3D(n.x/nLength, n.y/nLength, n.z/nLength);
-
 
 				Stage.printWriter.println("  facet normal " + n.x + " " + n.y + " " + n.z);
 				Stage.printWriter.println("    outer loop");
@@ -120,17 +115,6 @@ public class Triangulate {
 				Stage.printWriter.println("    endloop");
 				Stage.printWriter.println("  endfacet");
 			}
-
-
-
-
-
 		}
-		//Stage.printWriter.close (); 
-	}
-
-	public static void main(String[] args) throws IOException{
-		//createSTL();
-
 	}
 }
