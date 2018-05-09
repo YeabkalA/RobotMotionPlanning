@@ -6,12 +6,14 @@ public class Environment {
     static Scanner scan = new Scanner(System.in);
     static HashMap<Double, Stage> levels;
 
-    // the Minkowski sums of each obstacle with the robot
+    // the robot!
     Polygon robot;
-    int robotSize;
+
+    // number of obstacles
     int numObstcl;
+
+    // list of all obstacles
     ArrayList<Polygon> obstacles;
-    HashMap<Polygon, Point> obstacleOriginMap;
 
     public Polygon getRobot() {
     	return robot;
@@ -23,8 +25,7 @@ public class Environment {
 
     void addRobotData(){
 		System.out.println("NOW UPDATING ROBOT...");
-		System.out.println("What is the size of your robot?");
-		this.robotSize = Integer.parseInt(scan.nextLine());
+		System.out.println("Enter the coordinates of the robot's vertices, separated by spaces.");
 		double[] vertices = Arrays.stream(scan.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
 		this.robot = new Polygon(vertices);	    
     }
@@ -32,18 +33,16 @@ public class Environment {
 
 				    
 
-    void addObstaclesData(){
-    	obstacleOriginMap = new HashMap<>();
+    void addObstaclesData() {
 		System.out.println("NOW UPDATING OBSTACLES...");
 		System.out.println("How many obstacles are there on your board?");
 		this.numObstcl = Integer.parseInt(scan.nextLine());
 		obstacles = new ArrayList<>();
 		for(int i=0;i<this.numObstcl;i++){
+            System.out.printf("Now entering data for obstacle #%d\n", i+1);
 		    double[] vertices = Arrays.stream(scan.nextLine().split(" ")).mapToDouble(Double::parseDouble).toArray();
 		    Polygon obstacle = new Polygon(vertices);
 		    this.obstacles.add(obstacle);
-		    Point origin = new Point(vertices[0], vertices[1]);
-		    this.obstacleOriginMap.put(obstacle, origin);
 		}
     }
 
@@ -60,20 +59,28 @@ public class Environment {
     		}
     		levels.put(i,stage);
     	}
-
-
-        
-       
     }
 
-    public static void main(String[] args) throws IOException{
-//    	System.out.println("Name of file");
-//    	String name = scan.nextLine();
+    public static void beginDataInput() throws Exception{
+        String display = "MINKOWSKI LEVELS BUILDER";
+        for(int i=0;i<display.length();i++){
+            Thread.sleep(100);
+            System.out.print(display.charAt(i));
+        }
+        Thread.sleep(500);
+        System.out.println("\n---------------------\n");
+    }
+
+    public static void main(String[] args) throws Exception{
+
 		Environment env = new Environment();
+        System.out.println("PLEASE ENTER THE DIRECTORY OF THE STL FILE WHERE YOU WANT YOUR FINAL RESULTS TO BE SAVED...");
+        String savingDir = scan.nextLine();
+        beginDataInput();
 		env.addRobotData();
 		env.addObstaclesData();
 		buildStage(env);
-		Stage.createMainSTL(levels);
+		Stage.createMainSTL(levels, savingDir);
 		
 		
     }

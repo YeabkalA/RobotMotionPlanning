@@ -17,23 +17,16 @@ public class Stage {
 
 
 
-	public static void createMainSTL(HashMap<Double, Stage> levels) throws IOException{
-		file = new File("src/Main6.STL");
+	public static void createMainSTL(HashMap<Double, Stage> levels, String directory) throws IOException{
+		file = new File(directory);
 
-		// create the stage
-
-
-		double[] lowerBase = Arrays.stream("0 0 10000 0 10000 10000 0 10000".split(" ")).mapToDouble(Double::parseDouble).toArray();
+		double[] lowerBase = Arrays.stream("0 0 1000 0 1000 1000 0 1000".split(" ")).mapToDouble(Double::parseDouble).toArray();
 		Polygon base = new Polygon(lowerBase);
-
-		
-
-
 
 		printWriter = new PrintWriter(file);
 		printWriter.println("solid minkowski");
 
-		//Triangulate.createSTL(base.toPtArr(),base.toPtArr(),0,360);
+		Triangulate.createSTL(base.toPtArr(),base.toPtArr(),0,360);
 		for(double i=0.0;i<90.0;i+=5.0){
 			Stage s1 = levels.get(i);
 			Stage s2 = levels.get(i+5);
