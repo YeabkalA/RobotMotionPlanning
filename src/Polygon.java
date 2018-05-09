@@ -196,6 +196,13 @@ public static Point rotate(Point center , Point point, double angle) {
         for(Point p: pointArr){
             System.out.printf("--(%f, %f) \n\n",p.getX(), p.getY());
         }
+        
+        Polygon rotatedPol = rotatePolygon(pol1, 360);
+        
+        pol1.print();
+        rotatedPol.print();
+//        Drawer d = new Drawer(pol1);
+//        Drawer d2 = new Drawer(rotatedPol);
 
         // Point a = new Point(0,3);
         // Point por = new Point(0,1);

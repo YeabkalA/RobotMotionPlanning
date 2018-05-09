@@ -18,7 +18,7 @@ public class Stage {
 
 
 	public static void createMainSTL(HashMap<Double, Stage> levels) throws IOException{
-		file = new File("Main.STL");
+		file = new File("src/Main2.STL");
 
 		// create the stage
 
@@ -52,8 +52,8 @@ public class Stage {
 
 		}
 
-		printWriter.println ("endsolid");
-		printWriter.close();
+		//printWriter.println ("endsolid");
+		//printWriter.close();
 	}
 
 }

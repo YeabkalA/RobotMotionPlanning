@@ -10,11 +10,15 @@ public class Triangulate {
 			y = yy;
 			z = zz;
 		}
+		
+		public String toString() {
+			return String.format("P3D(%f,  %f, %f)", x, y, z); 
+		}
 
 	}
 
 	public static void createSTL(Point[] f1, Point[] f2, double l1, double l2) throws IOException{
-		file = Stage.file;
+		file = new File("src/Main2.STL");
 
 		Point3D[] face1 = new Point3D[f1.length];
 
@@ -22,6 +26,7 @@ public class Triangulate {
 
 		for(int i=0;i<f1.length;i++){
 			face1[i] = new Point3D(f1[i].getX(), f1[i].getY(), l1);
+			System.out.println("Point::: " + face1[i].toString());
 		}
 
 		for(int i=0;i<f1.length;i++){
@@ -121,21 +126,7 @@ public class Triangulate {
 
 
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-		Stage.printWriter.println ("endsolid");
-		Stage.printWriter.close (); 
+		//Stage.printWriter.close (); 
 	}
 
 	public static void main(String[] args) throws IOException{
