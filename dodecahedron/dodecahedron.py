@@ -156,18 +156,18 @@ def generate_STL(face_list):
         stl_rect(p1,p2,p3,p4)
         n2 = get_normal_for_face(face_list[i+1])
         N2 = (n2[0]/10, n2[1]/10, n2[2]/10)
-        p1 = face_center(face_list[i+1])
-        p2 = edge_center(face_list[i],face_list[i+1])
-        p3 = []
-        p4 = []
+        q1 = face_center(face_list[i+1])
+        q2 = edge_center(face_list[i],face_list[i+1])
+        q3 = []
+        q4 = []
         for i in range(3):
-            p3.append(N2[i] + p1[i])
-            p4.append(N2[i] + p2[i])
-        stl_rect(p1,p2,p3,p4)
+            q3.append(N2[i] + q1[i])
+            q4.append(N2[i] + q2[i])
+        stl_rect(q1,q2,q3,q4)
 
 
 
-fl = follow_path([4, 2, 1, 3, 2, 3]*2)
+fl = follow_path([3, 1, 3, 1, 4, 3]*2)
 generate_STL(fl)
 
 
