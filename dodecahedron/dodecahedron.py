@@ -121,6 +121,8 @@ def follow_path(turns):
         face_list.append(graph[face_list[-1]][out_idx])
     return face_list
 
+
+
 def stl_rect(p1,p2,p3,p4):
     N = get_normal(p1,p2,p3)
     print "  facet normal ",N[0],N[1],N[2]
@@ -132,8 +134,8 @@ def stl_rect(p1,p2,p3,p4):
     print "  endfacet"
     print "  facet normal ",N[0],N[1],N[2]
     print "    outer loop"
-    print "      vertex",p2[0],p2[1],p2[2]
     print "      vertex",p3[0],p3[1],p3[2]
+    print "      vertex",p2[0],p2[1],p2[2]
     print "      vertex",p4[0],p4[1],p4[2]
     print "    endloop"
     print "  endfacet"
@@ -163,7 +165,8 @@ def generate_STL(face_list):
             p4.append(N2[i] + p2[i])
         stl_rect(p1,p2,p3,p4)
 
-fl = follow_path([4, 2, 1, 3, 2, 3])
+
+fl = follow_path([4, 2, 1, 3, 2, 3]*2)
 generate_STL(fl)
 
 
