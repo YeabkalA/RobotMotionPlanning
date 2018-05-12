@@ -148,7 +148,7 @@ def generate_STL(face_list):
         p1 = face_center(face_list[i])
         p = edge_center(face_list[i],face_list[i+1])
         vp = (p[0] - p1[0], p[1] - p1[1], p[2] - p1[2])
-        p2 = (p[0] + 0.07*vp[0], p[1] + 0.07*vp[1], p[2] + 0.07*vp[2])
+        p2 = (p[0] + 0.1*vp[0], p[1] + 0.1*vp[1], p[2] + 0.1*vp[2])
         p3 = []
         p4 = []
         for j in range(3):
@@ -161,7 +161,7 @@ def generate_STL(face_list):
         q1 = face_center(face_list[i+1])
         q = edge_center(face_list[i],face_list[i+1])
         vq = (q[0] - q1[0], q[1] - q1[1], q[2] - q1[2])
-        q2 = (q[0] + 0.07*vq[0], p[1] + 0.07*vq[1], p[2] + 0.07*vq[2])
+        q2 = (q[0] + 0.1*vq[0], p[1] + 0.1*vq[1], p[2] + 0.1*vq[2])
         q3 = []
         q4 = []
         for k in range(3):
