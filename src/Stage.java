@@ -17,7 +17,9 @@ public class Stage {
 
 
 
-	public static void createMainSTL(HashMap<Double, Stage> levels, String directory, boolean stage) throws IOException{
+	public static boolean createMainSTL(HashMap<Double, Stage> levels, String directory, boolean stage) throws IOException {
+		System.out.println("Printing!!!!!!");
+
 		file = new File("../STLs/"+directory);
 
 		double[] lowerBase = Arrays.stream("0 0 1000 0 1000 1000 0 1000".split(" ")).mapToDouble(Double::parseDouble).toArray();
@@ -41,6 +43,10 @@ public class Stage {
 		
 		printWriter.println ("endsolid");
 		printWriter.close();
+
+		return true;
 	}
+
+
 
 }

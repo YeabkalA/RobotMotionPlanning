@@ -9,11 +9,19 @@ public class Environment {
     // the robot!
     Polygon robot;
 
+    public void setRobot(Polygon r) {
+        robot = r;
+    }
+
     // number of obstacles
     int numObstcl;
 
     // list of all obstacles
     ArrayList<Polygon> obstacles;
+
+    public void addObstacle(Polygon o){
+        obstacles.add(o);
+    }
 
     public Polygon getRobot() {
     	return robot;
@@ -60,6 +68,53 @@ public class Environment {
     		levels.put(i,stage);
     	}
     }
+
+    public static HashMap<Double, Stage> buildLevel(Environment env) throws IOException {
+        HashMap<Double, Stage> levels = new HashMap<>();
+        for(double i=0.0;i<=360.0;i+=5.0) {
+            Stage stage = new Stage();
+            Polygon robot = Polygon.rotatePolygon(env.getRobot(),i);
+            for(Polygon p: env.getObstacles()) {
+                Polygon minkSum = new Polygon();
+                minkSum = p.getMinkowski(robot);
+                minkSum.translate(p.getOrigin());
+                stage.figures.add(minkSum);
+            }
+            levels.put(i,stage);
+        }
+        return levels;
+    }
+
+    public static Environment buildEnvironmentFromFile(File file) throws IOException {
+
+
+        FileReader f = new FileReader(file);
+        BufferedReader br = new BufferedReader(f);
+        
+        Environment env = new Environment();
+
+        String robotData = br.readLine();
+        double[] robotVertices = Arrays.stream(robotData.split(" ")).mapToDouble(Double::parseDouble).toArray();
+        Polygon robot = new Polygon(robotVertices);
+
+        env.setRobot(robot);
+
+        int numObstacles = Integer.parseInt(br.readLine());
+
+        env.obstacles = new ArrayList<>();
+
+        for(int i=0;i<numObstacles;i++){
+            String obs = br.readLine();
+            double[] obstacleVertices = Arrays.stream(robotData.split(" ")).mapToDouble(Double::parseDouble).toArray();
+            env.addObstacle(new Polygon(obstacleVertices));
+        }
+
+        System.out.println("Building ENV");
+
+        return env;
+    }
+
+
 
     public static void beginDataInput() throws Exception{
         String display = "MINKOWSKI LEVELS BUILDER";
