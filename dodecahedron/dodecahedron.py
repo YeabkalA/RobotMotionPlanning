@@ -75,17 +75,6 @@ def edge_partitions(m, n):
     return partitions
 
 
-
-# Builds a path, starting at face 0 -> face 1, 
-# then following the given list, which contains indices of counter-clockwise turns.
-def follow_path(turns):
-    face_list = [0, 1]
-    for t in turns:
-        in_idx = graph[face_list[-1]].index(face_list[-2])
-        out_idx = (in_idx + t) % 5
-        face_list.append(graph[face_list[-1]][out_idx])
-    return face_list
-
 def get_normal_for_face(n):
     points = [faces[n][0], faces[n][1], faces[n][2]]
     N = get_normal(points[0], points[1], points[2])
@@ -119,20 +108,55 @@ def crossproduct_points(a,b,c,d):
     cs = cproduct_vectors(p,q)
     return cs
 
-edge = list(set(faces[0]) & set(faces[1]))
 
 
-print edge
-print edge_center(0,1)
-print "****************"
 
-edges0 = edge_partitions(0,1);
-p1 = edges0[0]
-p2 = edges0[1];
-vec = (p1[0]-p2[0], p1[1]-p2[1], p1[2]-p2[2])
+# Builds a path, starting at face 0 -> face 1, 
+# then following the given list, which contains indices of counter-clockwise turns.
+def follow_path(turns):
+    face_list = [0, 1]
+    for t in turns:
+        in_idx = graph[face_list[-1]].index(face_list[-2])
+        out_idx = (in_idx + t) % 5
+        face_list.append(graph[face_list[-1]][out_idx])
+    return face_list
 
-print cproduct_vectors(get_normal_for_face(0), vec)
-print crossproduct_points((2,3,5),(4,3,5),(2,4,5),(2,6,5))
+def stl_rect(p1,p2,p3,p4):
+    N = get_normal(p1,p2,p3)
+    print "  facet normal ",N[0],N[1],N[2]
+    print "    outer loop"
+    print "      vertex",p1[0],p1[1],p1[2]
+    print "      vertex",p2[0],p2[1],p2[2]
+    print "      vertex",p3[0],p3[1],p3[2]
+    print "    endloop"
+    print "  endfacet"
+    print "  facet normal ",N[0],N[1],N[2]
+    print "    outer loop"
+    print "      vertex",p2[0],p2[1],p2[2]
+    print "      vertex",p3[0],p3[1],p3[2]
+    print "      vertex",p4[0],p4[1],p4[2]
+    print "    endloop"
+    print "  endfacet"
+
+def generate_STL(face_list):
+    print "solid layers"
+    for i in range(len(face_list)-1):
+        n = get_normal_for_face(face_list[i])
+        N = (n[0]/2, n[1]/2, n[2]/2)
+        p1 = face_center(face_list[i])
+        p2 = edge_center(face_list[i],face_list[i+1])
+        
+        p3 = N + p1
+        p4 = N + p2
+        stl_rect(p1,p2,p3,p4)
+        p1 = face_center(face_list[i+1])
+        p2 = edge_center(face_list[i],face_list[i+1])
+        p3 = N + p1
+        p4 = N + p2
+        stl_rect(p1,p2,p3,p4)
+
+fl = follow_path([4, 2, 1, 3, 2, 3])
+generate_STL(fl)
 
 
 
