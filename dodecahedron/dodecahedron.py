@@ -142,7 +142,7 @@ def generate_STL(face_list):
     print "solid layers"
     for i in range(len(face_list)-1):
         n = get_normal_for_face(face_list[i])
-        N = (n[0]/2, n[1]/2, n[2]/2)
+        N = (-n[0]/2, -n[1]/2, -n[2]/2)
         p1 = face_center(face_list[i])
         p2 = edge_center(face_list[i],face_list[i+1])
         
