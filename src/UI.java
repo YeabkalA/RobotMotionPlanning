@@ -41,7 +41,7 @@ public class UI extends JFrame {
 					//if(file.equals("")) return;
 					System.out.println("The selected file is " + file);
 					Environment env = Environment.buildEnvironmentFromFile(new File(file));
-					boolean successfulParse = Stage.createMainSTL(Environment.buildLevel(env), "UISTL.STL", true);
+					boolean successfulParse = Stage.createMainSTL(Environment.buildLevel(env), "UISTL.STL", false);
 					if(successfulParse){
 						JOptionPane.showMessageDialog(getContentPane(),
 							"Successfully Generated STL!");
