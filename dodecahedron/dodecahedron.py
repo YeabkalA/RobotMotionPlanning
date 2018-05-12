@@ -142,17 +142,23 @@ def generate_STL(face_list):
     print "solid layers"
     for i in range(len(face_list)-1):
         n = get_normal_for_face(face_list[i])
-        N = (-n[0]/2, -n[1]/2, -n[2]/2)
+        N = (n[0]/2, n[1]/2, n[2]/2)
         p1 = face_center(face_list[i])
         p2 = edge_center(face_list[i],face_list[i+1])
-        
-        p3 = N + p1
-        p4 = N + p2
+        p3 = []
+        p4 = []
+        for i in range(3):
+            p3.append(N[i] + p1[i])
+            p4.append(N[i] + p2[i])
+
         stl_rect(p1,p2,p3,p4)
         p1 = face_center(face_list[i+1])
         p2 = edge_center(face_list[i],face_list[i+1])
-        p3 = N + p1
-        p4 = N + p2
+        p3 = []
+        p4 = []
+        for i in range(3):
+            p3.append(N[i] + p1[i])
+            p4.append(N[i] + p2[i])
         stl_rect(p1,p2,p3,p4)
 
 fl = follow_path([4, 2, 1, 3, 2, 3])
