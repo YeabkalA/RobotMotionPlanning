@@ -96,11 +96,8 @@ public class Environment {
         String robotData = br.readLine();
         double[] robotVertices = Arrays.stream(robotData.split(" ")).mapToDouble(Double::parseDouble).toArray();
         Polygon robot = new Polygon(robotVertices);
-
         env.setRobot(robot);
-
         int numObstacles = Integer.parseInt(br.readLine());
-
         env.obstacles = new ArrayList<>();
 
         for(int i=0;i<numObstacles;i++){
@@ -108,8 +105,6 @@ public class Environment {
             double[] obstacleVertices = Arrays.stream(robotData.split(" ")).mapToDouble(Double::parseDouble).toArray();
             env.addObstacle(new Polygon(obstacleVertices));
         }
-
-        System.out.println("Building ENV");
 
         return env;
     }

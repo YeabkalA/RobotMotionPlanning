@@ -38,9 +38,8 @@ public class UI extends JFrame {
 			public void mouseClicked(MouseEvent e){
 
 				try {
-					//if(file.equals("")) return;
 					System.out.println("The selected file is " + file);
-					Environment env = Environment.buildEnvironmentFromFile(new File(file));
+					Environment env = Environment.buildEnvironmentFromFile(new File("../STLs/"+file));
 					boolean successfulParse = Stage.createMainSTL(Environment.buildLevel(env), "UISTL.STL", false);
 					if(successfulParse){
 						JOptionPane.showMessageDialog(getContentPane(),
