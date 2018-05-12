@@ -144,9 +144,11 @@ def generate_STL(face_list):
     print "solid layers"
     for i in range(len(face_list)-1):
         n = get_normal_for_face(face_list[i])
-        N = (n[0]/10, n[1]/10, n[2]/10)
+        N = (n[0]/14, n[1]/14, n[2]/14)
         p1 = face_center(face_list[i])
-        p2 = edge_center(face_list[i],face_list[i+1])
+        p = edge_center(face_list[i],face_list[i+1])
+        vp = (p[0] - p1[0], p[1] - p1[1], p[2] - p1[2])
+        p2 = (p[0] + 0.07*vp[0], p[1] + 0.07*vp[1], p[2] + 0.07*vp[2])
         p3 = []
         p4 = []
         for j in range(3):
@@ -155,9 +157,11 @@ def generate_STL(face_list):
 
         stl_rect(p1,p2,p3,p4)
         n2 = get_normal_for_face(face_list[i+1])
-        N2 = (n2[0]/10, n2[1]/10, n2[2]/10)
+        N2 = (n2[0]/14, n2[1]/14, n2[2]/14)
         q1 = face_center(face_list[i+1])
-        q2 = edge_center(face_list[i],face_list[i+1])
+        q = edge_center(face_list[i],face_list[i+1])
+        vq = (q[0] - q1[0], q[1] - q1[1], q[2] - q1[2])
+        q2 = (q[0] + 0.07*vq[0], p[1] + 0.07*vq[1], p[2] + 0.07*vq[2])
         q3 = []
         q4 = []
         for k in range(3):
