@@ -1,5 +1,7 @@
 # Robot Motion Planning
 
+Builds STL files for 3D objects representing the different levels of Minkowski Sums when a "robot" moves from one end to another end of a 2D path with obstacles.
+
 By Charlie Dana and Yeabkal Wubshit <br>
 Under the supervision of Dr. Robert Hochberg <br>
 
