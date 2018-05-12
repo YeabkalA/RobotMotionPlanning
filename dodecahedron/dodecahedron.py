@@ -149,9 +149,9 @@ def generate_STL(face_list):
         p2 = edge_center(face_list[i],face_list[i+1])
         p3 = []
         p4 = []
-        for i in range(3):
-            p3.append(N[i] + p1[i])
-            p4.append(N[i] + p2[i])
+        for j in range(3):
+            p3.append(N[j] + p1[j])
+            p4.append(N[j] + p2[j])
 
         stl_rect(p1,p2,p3,p4)
         n2 = get_normal_for_face(face_list[i+1])
@@ -160,10 +160,10 @@ def generate_STL(face_list):
         q2 = edge_center(face_list[i],face_list[i+1])
         q3 = []
         q4 = []
-        for i in range(3):
-            q3.append(N2[i] + q1[i])
-            q4.append(N2[i] + q2[i])
-        stl_rect(q1,q2,q3,q4)
+        for k in range(3):
+            q3.append(N2[k] + q1[k])
+            q4.append(N2[k] + q2[k])
+        stl_rect(q2,q1,q4,q3)
 
 
 
