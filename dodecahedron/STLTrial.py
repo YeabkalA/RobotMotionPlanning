@@ -45,7 +45,7 @@ print "  endfacet"
 print "  facet normal ",N[0],N[1],N[2]
 print "    outer loop"
 print "      vertex",p1[0],p1[1],p1[2]
-print "      vertex",p2[0],p2[1],p2[2]
+print "      vertex",p3[0],p3[1],p3[2]
 print "      vertex",p4[0],p4[1],p4[2]
 print "    endloop"
 print "  endfacet"
